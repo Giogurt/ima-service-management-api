@@ -10,3 +10,11 @@ type ImaService {
 type Query {
   imaServices: [ImaService!]!
 }
+
+type Mutation {
+  createImaService(createImaServiceInput: createImaServiceInput!): ImaService!
+}
+
+input createImaServiceInput {
+  clientName: String!
+}

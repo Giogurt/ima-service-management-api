@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { createImaServiceInput } from './dto/create-ima-service.input';
 import { ImaService } from './ima-service.entity';
 
 @Injectable()
@@ -14,6 +15,13 @@ export class ImaServicesService {
 
     //     return [imaService];
     // }
+    async createImaService(createImaServiceInput: createImaServiceInput): Promise<ImaService> {
+        const newImaService = this.imaServiceRepository.create(createImaServiceInput);
+
+        return this.imaServiceRepository.save(newImaService);
+    }
+   
+
     async findAll(): Promise<ImaService[]> {
         return this.imaServiceRepository.find();
     }
