@@ -43,8 +43,8 @@ export class CreateImaServiceInput {
     @Field(() => Int, {nullable: true})
     clientId?: number;
 
-    @Field(() => Int)
-    employeeId: number;
+    // @Field(() => Int)
+    // employeeId: number;
 
     // @ManyToOne(() => Client, client => client.services)
     // @Field(() => Client)

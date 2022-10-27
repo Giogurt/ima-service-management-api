@@ -2,15 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Employee {
-  id: Int!
-  authId: String!
-  name: String!
-  email: String!
-  role: String!
-  services: [ImaService!]
-}
-
 type ImaService {
   id: Int!
   clientComment: String
@@ -24,9 +15,7 @@ type ImaService {
   deviceCondition: String!
   deviceNotes: String
   clientId: Int!
-  employeeId: Int!
   client: Client!
-  employee: Employee
 }
 
 type Client {
@@ -35,6 +24,14 @@ type Client {
   name: String!
   email: String!
   services: [ImaService!]
+}
+
+type Employee {
+  id: Int!
+  authId: String!
+  name: String!
+  email: String!
+  role: String!
 }
 
 type Query {
@@ -64,7 +61,6 @@ input CreateImaServiceInput {
   deviceCondition: String!
   deviceNotes: String
   clientId: Int
-  employeeId: Int!
 }
 
 input CreateClientInput {
