@@ -1,32 +1,77 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Client } from "src/clients/entities/client.entity";
+import { Employee } from "src/employees/employee.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 @ObjectType()
 export class ImaService {
     @PrimaryGeneratedColumn()
-    @Field(type => Int)
+    @Field(() => Int)
     id: number;
+
+    @Column({nullable: true})
+    @Field({nullable: true})
+    clientComment?: string;
+
+    @Column({nullable: true})
+    @Field({nullable: true})
+    employeeNotes?: string;
 
     @Column()
     @Field()
-    clientName: string;
+    status: string;
 
-    // @Field({nullable: true})
-    // clientComment?: string;
-    // @Field({nullable: true})
-    // employeeNotes?: string;
-    // @Field()
-    // status: string;
-    // @Field()
-    // entryDate: Date;
-    // @Field({nullable: true})
-    // departureDate?: Date;
-    // @Field(type => Int)
-    // completedPercent: number;
+    @Column()
+    @Field()
+    entryDate: string;
+
+    @Column({nullable: true})
+    @Field({nullable: true})
+    departureDate?: string;
+
+    @Column()
+    @Field(() => Int)
+    completedPercent: number;
+
+    @Column()
+    @Field()
+    toPickup: boolean;
+
+    @Column()
+    @Field()
+    deviceModel: string;
+
+    @Column()
+    @Field()
+    deviceCondition: string;
+
+    @Column({nullable: true})
+    @Field({nullable: true})
+    deviceNotes?: string;
+
+    // @Column()
     // @Field()
     // needsInvoice: boolean;
+
+    // @Column()
     // @Field({nullable: true})
     // invoice?: string;
+
+    @Column()
+    @Field(() => Int)
+    clientId: number;
+
+    @Column()
+    @Field(() => Int)
+    employeeId: number;
+
+    @ManyToOne(() => Client, client => client.services)
+    @Field(() => Client)
+    client: Client;
+
+    @ManyToOne(() => Employee, employee => employee.services)
+    @Field(() => Employee)
+    employee: Employee;
     
 }

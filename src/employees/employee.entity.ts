@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ImaService } from 'src/ima-services/ima-service.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -27,4 +28,8 @@ export class Employee {
   @Column()
   @Field()
   role: string;
+
+  @OneToMany(() => ImaService, imaService => imaService.client)
+  @Field(() => [ImaService], {nullable: true})
+  services?: ImaService[];
 }
