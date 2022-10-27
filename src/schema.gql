@@ -39,6 +39,7 @@ type Client {
 
 type Query {
   imaServices: [ImaService!]!
+  imaService(id: Int!): ImaService!
   clients: [Client!]!
   clientByEmail(email: String!): Client!
   client(id: Int!): Client!

@@ -35,15 +35,17 @@ export class ImaServicesService {
       ...{ clientId: serviceClient.id, status: 'pending', completedPercent: 0 },
     };
 
-    const newImaService = this.imaServiceRepository.create(
-      serviceProps,
-    );
+    const newImaService = this.imaServiceRepository.create(serviceProps);
 
     return this.imaServiceRepository.save(newImaService);
   }
 
   async findAll(): Promise<ImaService[]> {
     return this.imaServiceRepository.find();
+  }
+
+  async findOne(id: number): Promise<ImaService> {
+    return this.imaServiceRepository.findOneByOrFail({ id: id });
   }
 
   async getClient(clientId: number): Promise<Client> {
