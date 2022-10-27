@@ -16,9 +16,9 @@ export class Employee {
     @Field()
     name: string;
 
-    @Column()
-    @Field()
-    lastName: string;
+    // @Column()
+    // @Field()
+    // lastName: string;
 
     @Column()
     @Field()

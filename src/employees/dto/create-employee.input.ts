@@ -9,8 +9,8 @@ export class CreateEmployeeInput {
     @Field()
     name: string;
 
-    @Field()
-    lastName: string;
+    // @Field()
+    // lastName: string;
 
     @Field()
     email: string;
