@@ -1,4 +1,12 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { Client } from 'src/clients/entities/client.entity';
 import { CreateImaServiceInput } from './dto/create-ima-service.input';
 import { ImaService } from './ima-service.entity';
@@ -11,6 +19,11 @@ export class ImaServicesResolver {
   @Query(() => [ImaService])
   imaServices(): Promise<ImaService[]> {
     return this.imaServicesService.findAll();
+  }
+
+  @Query(() => ImaService)
+  imaService(@Args('id', { type: () => Int }) id: number): Promise<ImaService> {
+    return this.imaServicesService.findOne(id);
   }
 
   @ResolveField(() => Client)
