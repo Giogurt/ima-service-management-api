@@ -7,18 +7,30 @@ import { Client } from './entities/client.entity';
 
 @Injectable()
 export class ClientsService {
-  constructor(@InjectRepository(Client) private clientRepository: Repository<Client>) {}
+  constructor(
+    @InjectRepository(Client) private clientRepository: Repository<Client>,
+  ) {}
 
-  create(createClientInput: CreateClientInput) {
-    return 'This action adds a new client';
+  async createClient(createClientInput: CreateClientInput): Promise<Client> {
+    const newClient = this.clientRepository.create(createClientInput);
+
+    return this.clientRepository.save(newClient);
   }
 
-  findAll() {
-    return `This action returns all clients`;
+  async findAll(): Promise<Client[]> {
+    return this.clientRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} client`;
+  async findOneByEmail(email: string): Promise<Client> {
+    return this.clientRepository.findOneByOrFail({ email: email });
+  }
+
+  async findOne(id: number): Promise<Client> {
+    return this.clientRepository.findOneOrFail({
+      where: {
+        id: id,
+      },
+    });
   }
 
   update(id: number, updateClientInput: UpdateClientInput) {

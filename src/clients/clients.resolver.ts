@@ -10,12 +10,17 @@ export class ClientsResolver {
 
   @Mutation(() => Client)
   createClient(@Args('createClientInput') createClientInput: CreateClientInput) {
-    return this.clientsService.create(createClientInput);
+    return this.clientsService.createClient(createClientInput);
   }
 
   @Query(() => [Client], { name: 'clients' })
   clients() {
     return this.clientsService.findAll();
+  }
+
+  @Query(() => Client, { name: 'clientByEmail' })
+  clientByEmail(@Args('email') email: string) {
+    return this.clientsService.findOneByEmail(email);
   }
 
   @Query(() => Client, { name: 'client' })

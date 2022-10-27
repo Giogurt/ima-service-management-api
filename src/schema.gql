@@ -2,17 +2,31 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ImaService {
-  id: Int!
-  clientName: String!
-}
-
 type Employee {
   id: Int!
   authId: String!
   name: String!
   email: String!
   role: String!
+  services: [ImaService!]
+}
+
+type ImaService {
+  id: Int!
+  clientComment: String
+  employeeNotes: String
+  status: String!
+  entryDate: String!
+  departureDate: String
+  completedPercent: Int!
+  toPickup: Boolean!
+  deviceModel: String!
+  deviceCondition: String!
+  deviceNotes: String
+  clientId: Int!
+  employeeId: Int!
+  client: Client!
+  employee: Employee
 }
 
 type Client {
@@ -20,23 +34,42 @@ type Client {
   authId: String
   name: String!
   email: String!
+  services: [ImaService!]
 }
 
 type Query {
   imaServices: [ImaService!]!
-  employee(id: Int!): Employee!
   clients: [Client!]!
+  clientByEmail(email: String!): Client!
   client(id: Int!): Client!
+  employee(id: Int!): Employee!
 }
 
 type Mutation {
-  createImaService(createImaServiceInput: createImaServiceInput!): ImaService!
-  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
+  createImaService(createImaServiceInput: CreateImaServiceInput!): ImaService!
   createClient(createClientInput: CreateClientInput!): Client!
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
 }
 
-input createImaServiceInput {
+input CreateImaServiceInput {
   clientName: String!
+  clientEmail: String!
+  clientComment: String
+  employeeNotes: String
+  entryDate: String!
+  departureDate: String
+  toPickup: Boolean!
+  deviceModel: String!
+  deviceCondition: String!
+  deviceNotes: String
+  clientId: Int
+  employeeId: Int!
+}
+
+input CreateClientInput {
+  authId: String
+  name: String!
+  email: String!
 }
 
 input CreateEmployeeInput {
@@ -44,10 +77,4 @@ input CreateEmployeeInput {
   name: String!
   email: String!
   role: String
-}
-
-input CreateClientInput {
-  authId: String
-  name: String!
-  email: String!
 }

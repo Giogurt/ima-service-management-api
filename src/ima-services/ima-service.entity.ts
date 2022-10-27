@@ -71,7 +71,7 @@ export class ImaService {
     client: Client;
 
     @ManyToOne(() => Employee, employee => employee.services)
-    @Field(() => Employee)
+    @Field(() => Employee, {nullable: true})
     employee: Employee;
     
 }

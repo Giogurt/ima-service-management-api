@@ -1,28 +1,56 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ClientsService } from 'src/clients/clients.service';
+import { Client } from 'src/clients/entities/client.entity';
 import { Repository } from 'typeorm';
-import { createImaServiceInput } from './dto/create-ima-service.input';
+import { CreateImaServiceInput } from './dto/create-ima-service.input';
 import { ImaService } from './ima-service.entity';
 
 @Injectable()
 export class ImaServicesService {
-    constructor(@InjectRepository(ImaService) private imaServiceRepository: Repository<ImaService>) {}
+  constructor(
+    @InjectRepository(ImaService)
+    private imaServiceRepository: Repository<ImaService>,
+    private clientsService: ClientsService,
+  ) {}
 
-    // async findAll(): Promise<ImaService[]> {
-    //     const imaService = new ImaService();
-    //     imaService.id = 1;
-    //     imaService.clientName = "Clientongo";
+  async createImaService(
+    createImaServiceInput: CreateImaServiceInput,
+  ): Promise<ImaService> {
+    let serviceClient = new Client();
 
-    //     return [imaService];
-    // }
-    async createImaService(createImaServiceInput: createImaServiceInput): Promise<ImaService> {
-        const newImaService = this.imaServiceRepository.create(createImaServiceInput);
-
-        return this.imaServiceRepository.save(newImaService);
+    try {
+      serviceClient = await this.getClientByEmail(
+        createImaServiceInput.clientEmail,
+      );
+    } catch {
+      serviceClient = await this.clientsService.createClient({
+        name: createImaServiceInput.clientName,
+        email: createImaServiceInput.clientEmail,
+      });
     }
-   
 
-    async findAll(): Promise<ImaService[]> {
-        return this.imaServiceRepository.find();
-    }
+    const serviceProps = {
+      ...createImaServiceInput,
+      ...{ clientId: serviceClient.id, status: 'pending', completedPercent: 0 },
+    };
+
+    const newImaService = this.imaServiceRepository.create(
+      serviceProps,
+    );
+
+    return this.imaServiceRepository.save(newImaService);
+  }
+
+  async findAll(): Promise<ImaService[]> {
+    return this.imaServiceRepository.find();
+  }
+
+  async getClient(clientId: number): Promise<Client> {
+    return this.clientsService.findOne(clientId);
+  }
+
+  async getClientByEmail(clientEmail: string): Promise<Client> {
+    return this.clientsService.findOneByEmail(clientEmail);
+  }
 }
