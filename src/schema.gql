@@ -7,14 +7,33 @@ type ImaService {
   clientName: String!
 }
 
+type Employee {
+  id: Int!
+  authId: String!
+  name: String!
+  lastName: String!
+  email: String!
+  role: String!
+}
+
 type Query {
   imaServices: [ImaService!]!
+  employee(id: Int!): Employee!
 }
 
 type Mutation {
   createImaService(createImaServiceInput: createImaServiceInput!): ImaService!
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
 }
 
 input createImaServiceInput {
   clientName: String!
+}
+
+input CreateEmployeeInput {
+  authId: String!
+  name: String!
+  lastName: String!
+  email: String!
+  role: String
 }
