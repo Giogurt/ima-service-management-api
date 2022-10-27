@@ -1,30 +1,30 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
 export class Employee {
-    @PrimaryGeneratedColumn()
-    @Field(type => Int)
-    id: number;
+  @PrimaryGeneratedColumn()
+  @Field(() => Int)
+  id: number;
 
-    @Column()
-    @Field()
-    authId: string;
+  @Column()
+  @Field()
+  authId: string;
 
-    @Column()
-    @Field()
-    name: string;
+  @Column()
+  @Field()
+  name: string;
 
-    // @Column()
-    // @Field()
-    // lastName: string;
+  // @Column()
+  // @Field()
+  // lastName: string;
 
-    @Column()
-    @Field()
-    email: string;
+  @Column()
+  @Field()
+  email: string;
 
-    @Column()
-    @Field()
-    role: string;
+  @Column()
+  @Field()
+  role: string;
 }
