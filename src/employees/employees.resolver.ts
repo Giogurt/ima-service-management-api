@@ -7,12 +7,12 @@ import { EmployeesService } from './employees.service';
 export class EmployeesResolver {
     constructor(private employeesService: EmployeesService) {}
 
-    @Query(returns => Employee)
+    @Query(() => Employee)
     employee(@Args('id', {type: () => Int}) id: number): Promise<Employee> {
         return this.employeesService.findOne(id);
     }
     
-    @Mutation(returns => Employee)
+    @Mutation(() => Employee)
     createEmployee(@Args('createEmployeeInput') createEmployeeInput: CreateEmployeeInput): Promise<Employee> {
         return this.employeesService.createEmployee(createEmployeeInput);
     }

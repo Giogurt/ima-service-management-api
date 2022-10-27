@@ -1,17 +1,17 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { ImaService } from 'src/ima-services/ima-service.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
-export class Employee {
+export class Client {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id: number;
 
-  @Column()
-  @Field()
-  authId: string;
+  @Column({nullable: true})
+  @Field({nullable: true})
+  authId?: string;
 
   @Column()
   @Field()
@@ -24,10 +24,6 @@ export class Employee {
   @Column()
   @Field()
   email: string;
-
-  @Column()
-  @Field()
-  role: string;
 
   @OneToMany(() => ImaService, imaService => imaService.client)
   @Field(() => [ImaService], {nullable: true})
