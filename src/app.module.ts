@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ImaServicesModule } from './ima-services/ima-services.module';
 import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
     ImaServicesModule,
+    EmployeesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
