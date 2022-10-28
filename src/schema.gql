@@ -4,9 +4,74 @@
 
 type ImaService {
   id: Int!
-  clientName: String!
+  clientComment: String
+  employeeNotes: String
+  status: String!
+  entryDate: String!
+  departureDate: String
+  completedPercent: Int!
+  toPickup: Boolean!
+  deviceModel: String!
+  deviceCondition: String!
+  deviceNotes: String
+  clientId: Int!
+  client: Client!
+}
+
+type Client {
+  id: Int!
+  authId: String
+  name: String!
+  email: String!
+  services: [ImaService!]
+}
+
+type Employee {
+  id: Int!
+  authId: String!
+  name: String!
+  email: String!
+  role: String!
 }
 
 type Query {
   imaServices: [ImaService!]!
+  imaService(id: Int!): ImaService!
+  clients: [Client!]!
+  clientByEmail(email: String!): Client!
+  client(id: Int!): Client!
+  employee(id: Int!): Employee!
+}
+
+type Mutation {
+  createImaService(createImaServiceInput: CreateImaServiceInput!): ImaService!
+  createClient(createClientInput: CreateClientInput!): Client!
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
+}
+
+input CreateImaServiceInput {
+  clientName: String!
+  clientEmail: String!
+  clientComment: String
+  employeeNotes: String
+  entryDate: String!
+  departureDate: String
+  toPickup: Boolean!
+  deviceModel: String!
+  deviceCondition: String!
+  deviceNotes: String
+  clientId: Int
+}
+
+input CreateClientInput {
+  authId: String
+  name: String!
+  email: String!
+}
+
+input CreateEmployeeInput {
+  authId: String!
+  name: String!
+  email: String!
+  role: String
 }

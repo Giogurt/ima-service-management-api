@@ -1,28 +1,77 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Client } from "src/clients/entities/client.entity";
+import { Employee } from "src/employees/employee.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 @ObjectType()
 export class ImaService {
-    @Field(type => Int)
+    @PrimaryGeneratedColumn()
+    @Field(() => Int)
     id: number;
 
-    @Field()
-    clientName: string;
+    @Column({nullable: true})
+    @Field({nullable: true})
+    clientComment?: string;
 
-    // @Field({nullable: true})
-    // clientComment?: string;
-    // @Field({nullable: true})
-    // employeeNotes?: string;
-    // @Field()
-    // status: string;
-    // @Field()
-    // entryDate: Date;
-    // @Field({nullable: true})
-    // departureDate?: Date;
-    // @Field(type => Int)
-    // completedPercent: number;
+    @Column({nullable: true})
+    @Field({nullable: true})
+    employeeNotes?: string;
+
+    @Column()
+    @Field()
+    status: string;
+
+    @Column()
+    @Field()
+    entryDate: string;
+
+    @Column({nullable: true})
+    @Field({nullable: true})
+    departureDate?: string;
+
+    @Column()
+    @Field(() => Int)
+    completedPercent: number;
+
+    @Column()
+    @Field()
+    toPickup: boolean;
+
+    @Column()
+    @Field()
+    deviceModel: string;
+
+    @Column()
+    @Field()
+    deviceCondition: string;
+
+    @Column({nullable: true})
+    @Field({nullable: true})
+    deviceNotes?: string;
+
+    // @Column()
     // @Field()
     // needsInvoice: boolean;
+
+    // @Column()
     // @Field({nullable: true})
     // invoice?: string;
+
+    @Column()
+    @Field(() => Int)
+    clientId: number;
+
+    // @Column()
+    // @Field(() => Int)
+    // employeeId: number;
+
+    @ManyToOne(() => Client, client => client.services)
+    @Field(() => Client)
+    client: Client;
+
+    // @ManyToOne(() => Employee, employee => employee.services)
+    // @Field(() => Employee, {nullable: true})
+    // employee: Employee;
     
 }
