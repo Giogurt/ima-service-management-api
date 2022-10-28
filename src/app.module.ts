@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppController } from './app.controller';
@@ -17,15 +17,19 @@ import { ClientsModule } from './clients/clients.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'postgres',
-      entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get('PGHOST'),
+        port: configService.get<number>('PGPORT'),
+        username: configService.get<string>('PGUSER'),
+        password: configService.get<string>('PGPASSWORD'),
+        database: configService.get<string>('PGDATABASE'),
+        entities: ['dist/**/*.entity{.ts,.js}'],
+        synchronize: true,
+      }),
+      inject: [ConfigService],
     }),
     ImaServicesModule,
     EmployeesModule,
