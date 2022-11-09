@@ -27,6 +27,7 @@ export class ImaServicesService {
       serviceClient = await this.clientsService.createClient({
         name: createImaServiceInput.clientName,
         email: createImaServiceInput.clientEmail,
+        phone: createImaServiceInput.clientPhone,
       });
     }
 
