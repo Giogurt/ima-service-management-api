@@ -21,7 +21,7 @@ import { ClientsModule } from './clients/clients.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('PGHOST'),
+        host: configService.get<string>('PGHOST'),
         port: configService.get<number>('PGPORT'),
         username: configService.get<string>('PGUSER'),
         password: configService.get<string>('PGPASSWORD'),

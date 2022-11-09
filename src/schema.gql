@@ -12,6 +12,7 @@ type ImaService {
   completedPercent: Int!
   toPickup: Boolean!
   deviceModel: String!
+  deviceSerialNumber: String!
   deviceCondition: String!
   deviceNotes: String
   clientId: Int!
@@ -23,6 +24,7 @@ type Client {
   authId: String
   name: String!
   email: String!
+  phone: String!
   services: [ImaService!]
 }
 
@@ -52,14 +54,16 @@ type Mutation {
 input CreateImaServiceInput {
   clientName: String!
   clientEmail: String!
+  clientPhone: String!
   clientComment: String
   employeeNotes: String
   entryDate: String!
   departureDate: String
   toPickup: Boolean!
-  deviceModel: String!
   deviceCondition: String!
+  deviceModel: String!
   deviceNotes: String
+  deviceSerialNumber: String!
   clientId: Int
 }
 
@@ -67,6 +71,7 @@ input CreateClientInput {
   authId: String
   name: String!
   email: String!
+  phone: String!
 }
 
 input CreateEmployeeInput {

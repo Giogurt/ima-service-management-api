@@ -8,10 +8,9 @@ export class CreateClientInput {
   @Field()
   name: string;
 
-  // @Column()
-  // @Field()
-  // lastName: string;
-
   @Field()
   email: string;
+
+  @Field()
+  phone: string;
 }

@@ -44,6 +44,10 @@ export class ImaService {
 
     @Column()
     @Field()
+    deviceSerialNumber: string;
+
+    @Column()
+    @Field()
     deviceCondition: string;
 
     @Column({nullable: true})
