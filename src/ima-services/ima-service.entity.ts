@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, Float, Int, ObjectType } from "@nestjs/graphql";
 import { Client } from "src/clients/entities/client.entity";
 import { Employee } from "src/employees/employee.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -13,6 +13,10 @@ export class ImaService {
     @Column({nullable: true})
     @Field({nullable: true})
     clientComment?: string;
+
+    @Column({default: 0})
+    @Field(() => Float, {defaultValue: 0})
+    cost: number;
 
     @Column({nullable: true})
     @Field({nullable: true})

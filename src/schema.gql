@@ -5,6 +5,7 @@
 type ImaService {
   id: Int!
   clientComment: String
+  cost: Float!
   employeeNotes: String
   status: String!
   entryDate: String!
