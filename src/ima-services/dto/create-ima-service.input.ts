@@ -2,13 +2,14 @@ import { Field, InputType, Int } from "@nestjs/graphql";
 
 @InputType()
 export class CreateImaServiceInput {
-    // Temporal fields for mock
     @Field()
     clientName: string;
 
     @Field()
     clientEmail: string;
 
+    @Field()
+    clientPhone: string;
     
     @Field({nullable: true})
     clientComment?: string;
@@ -26,13 +27,16 @@ export class CreateImaServiceInput {
     toPickup: boolean;
 
     @Field()
-    deviceModel: string;
+    deviceCondition: string;
 
     @Field()
-    deviceCondition: string;
+    deviceModel: string;
 
     @Field({nullable: true})
     deviceNotes?: string;
+
+    @Field()
+    deviceSerialNumber: string;
 
     // @Field()
     // needsInvoice: boolean;

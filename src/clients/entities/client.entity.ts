@@ -17,13 +17,13 @@ export class Client {
   @Field()
   name: string;
 
-  // @Column()
-  // @Field()
-  // lastName: string;
-
   @Column()
   @Field()
   email: string;
+
+  @Column()
+  @Field()
+  phone: string;
 
   @OneToMany(() => ImaService, imaService => imaService.client)
   @Field(() => [ImaService], {nullable: true})
