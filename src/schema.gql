@@ -25,6 +25,9 @@ type ImaService {
   deviceSerialNumber: String!
   deviceCondition: String!
   deviceNotes: String
+  diagnosis: String
+  invoiceId: String
+  invoiceNote: String
   clientId: Int!
   employeeId: Int!
   client: Client!
@@ -84,9 +87,12 @@ input UpdateImaServiceInput {
   deviceNotes: String
   deviceSerialNumber: String
   id: Int!
-  cost: Float
-  status: String
   completedPercent: Int
+  cost: Float
+  diagnosis: String
+  invoiceId: String
+  invoiceNote: String
+  status: String
 }
 
 input CreateClientInput {
