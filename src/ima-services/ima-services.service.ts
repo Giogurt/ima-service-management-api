@@ -6,6 +6,7 @@ import { Employee } from 'src/employees/employee.entity';
 import { EmployeesService } from 'src/employees/employees.service';
 import { Repository } from 'typeorm';
 import { CreateImaServiceInput } from './dto/create-ima-service.input';
+import { UpdateImaServiceInput } from './dto/update-ima-service.input';
 import { ImaService } from './ima-service.entity';
 
 @Injectable()
@@ -51,6 +52,12 @@ export class ImaServicesService {
   async findOne(id: number): Promise<ImaService> {
     return this.imaServiceRepository.findOneByOrFail({ id: id });
   }
+
+  async update(updateImaServiceInput: UpdateImaServiceInput): Promise<ImaService> {
+    await this.imaServiceRepository.update(updateImaServiceInput.id, updateImaServiceInput);
+    return this.findOne(updateImaServiceInput.id)
+  }
+
 
   async getClient(clientId: number): Promise<Client> {
     return this.clientsService.findOne(clientId);

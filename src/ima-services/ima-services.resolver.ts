@@ -10,6 +10,7 @@ import {
 import { Client } from 'src/clients/entities/client.entity';
 import { Employee } from 'src/employees/employee.entity';
 import { CreateImaServiceInput } from './dto/create-ima-service.input';
+import { UpdateImaServiceInput } from './dto/update-ima-service.input';
 import { ImaService } from './ima-service.entity';
 import { ImaServicesService } from './ima-services.service';
 
@@ -42,5 +43,12 @@ export class ImaServicesResolver {
     @Args('createImaServiceInput') createImaServiceInput: CreateImaServiceInput,
   ): Promise<ImaService> {
     return this.imaServicesService.createImaService(createImaServiceInput);
+  }
+
+  @Mutation(() => ImaService)
+  updateImaService(
+    @Args('updateImaServiceInput') updateImaServiceInput: UpdateImaServiceInput,
+  ): Promise<ImaService> {
+    return this.imaServicesService.update(updateImaServiceInput);
   }
 }

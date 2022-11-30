@@ -51,6 +51,7 @@ type Query {
 
 type Mutation {
   createImaService(createImaServiceInput: CreateImaServiceInput!): ImaService!
+  updateImaService(updateImaServiceInput: UpdateImaServiceInput!): ImaService!
   createClient(createClientInput: CreateClientInput!): Client!
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
 }
@@ -70,6 +71,22 @@ input CreateImaServiceInput {
   deviceSerialNumber: String!
   clientId: Int
   employeeId: Int!
+}
+
+input UpdateImaServiceInput {
+  clientComment: String
+  employeeNotes: String
+  entryDate: String
+  departureDate: String
+  toPickup: Boolean
+  deviceCondition: String
+  deviceModel: String
+  deviceNotes: String
+  deviceSerialNumber: String
+  id: Int!
+  cost: Float
+  status: String
+  completedPercent: Int
 }
 
 input CreateClientInput {
