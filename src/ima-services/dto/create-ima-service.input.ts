@@ -1,4 +1,4 @@
-import { Field, Float, InputType, Int } from "@nestjs/graphql";
+import { Field, InputType, Int } from "@nestjs/graphql";
 
 @InputType()
 export class CreateImaServiceInput {
@@ -47,8 +47,8 @@ export class CreateImaServiceInput {
     @Field(() => Int, {nullable: true})
     clientId?: number;
 
-    // @Field(() => Int)
-    // employeeId: number;
+    @Field(() => Int)
+    employeeId: number;
 
     // @ManyToOne(() => Client, client => client.services)
     // @Field(() => Client)

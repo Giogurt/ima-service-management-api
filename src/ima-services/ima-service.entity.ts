@@ -70,16 +70,16 @@ export class ImaService {
     @Field(() => Int)
     clientId: number;
 
-    // @Column()
-    // @Field(() => Int)
-    // employeeId: number;
+    @Column()
+    @Field(() => Int)
+    employeeId: number;
 
     @ManyToOne(() => Client, client => client.services)
     @Field(() => Client)
     client: Client;
 
-    // @ManyToOne(() => Employee, employee => employee.services)
-    // @Field(() => Employee, {nullable: true})
-    // employee: Employee;
+    @ManyToOne(() => Employee, employee => employee.services)
+    @Field(() => Employee, {nullable: true})
+    employee: Employee;
     
 }

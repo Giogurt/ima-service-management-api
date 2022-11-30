@@ -29,7 +29,7 @@ export class Employee {
   @Field()
   role: string;
 
-//   @OneToMany(() => ImaService, imaService => imaService.client)
-//   @Field(() => [ImaService], {nullable: true})
-//   services?: ImaService[];
+  @OneToMany(() => ImaService, imaService => imaService.employee)
+  @Field(() => [ImaService], {nullable: true})
+  services?: ImaService[];
 }

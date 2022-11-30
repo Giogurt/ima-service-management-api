@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientsService } from 'src/clients/clients.service';
 import { Client } from 'src/clients/entities/client.entity';
+import { Employee } from 'src/employees/employee.entity';
+import { EmployeesService } from 'src/employees/employees.service';
 import { Repository } from 'typeorm';
 import { CreateImaServiceInput } from './dto/create-ima-service.input';
 import { ImaService } from './ima-service.entity';
@@ -12,6 +14,7 @@ export class ImaServicesService {
     @InjectRepository(ImaService)
     private imaServiceRepository: Repository<ImaService>,
     private clientsService: ClientsService,
+    private employeeService: EmployeesService,
   ) {}
 
   async createImaService(
@@ -55,5 +58,9 @@ export class ImaServicesService {
 
   async getClientByEmail(clientEmail: string): Promise<Client> {
     return this.clientsService.findOneByEmail(clientEmail);
+  }
+
+  async getEmployee(employeeId: number): Promise<Employee> {
+    return this.employeeService.findOne(employeeId);
   }
 }

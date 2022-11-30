@@ -8,6 +8,7 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { Client } from 'src/clients/entities/client.entity';
+import { Employee } from 'src/employees/employee.entity';
 import { CreateImaServiceInput } from './dto/create-ima-service.input';
 import { ImaService } from './ima-service.entity';
 import { ImaServicesService } from './ima-services.service';
@@ -29,6 +30,11 @@ export class ImaServicesResolver {
   @ResolveField(() => Client)
   client(@Parent() service: ImaService): Promise<Client> {
     return this.imaServicesService.getClient(service.clientId);
+  }
+
+  @ResolveField(() => Employee)
+  employee(@Parent() service: ImaService): Promise<Employee> {
+    return this.imaServicesService.getEmployee(service.employeeId);
   }
 
   @Mutation(() => ImaService)
