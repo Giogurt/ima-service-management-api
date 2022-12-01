@@ -28,6 +28,14 @@ export class ImaServicesResolver {
     return this.imaServicesService.findOne(id);
   }
 
+  @Query(() => ImaService)
+  clientService(
+    @Args('serviceId', { type: () => Int}) serviceId: number, 
+    @Args('clientPhone') clientPhone: string,
+  ): Promise<ImaService> {
+    return this.imaServicesService.authenticateClientWithPhone(clientPhone, serviceId);
+  }
+
   @ResolveField(() => Client)
   client(@Parent() service: ImaService): Promise<Client> {
     return this.imaServicesService.getClient(service.clientId);

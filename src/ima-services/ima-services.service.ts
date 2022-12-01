@@ -70,4 +70,21 @@ export class ImaServicesService {
   async getEmployee(employeeId: number): Promise<Employee> {
     return this.employeeService.findOne(employeeId);
   }
+
+  /**
+   * Checks if the client phone matches the phone linked to the service.
+   * If true returns the service, if false returns an empty service
+   * @param {string} clientPhone Phone of the client linked to the service
+   * @param {number} serviceId Id of the service to retrieve
+   * @returns {ImaService} If true returns the service, if false returns an empty service
+   */
+  async authenticateClientWithPhone(clientPhone: string, serviceId: number): Promise<ImaService> {
+    const service = await this.findOne(serviceId);
+    const client = await this.getClient(service.clientId)
+
+    if (client.phone === clientPhone) {
+      return service;
+    }
+    return Promise.reject(new Error('The phone provided is incorrect'));
+  }
 }
