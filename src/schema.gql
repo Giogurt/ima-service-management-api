@@ -2,9 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Employee {
+  id: Int!
+  authId: String!
+  name: String!
+  email: String!
+  role: String!
+  services: [ImaService!]
+}
+
 type ImaService {
   id: Int!
   clientComment: String
+  cost: Float!
   employeeNotes: String
   status: String!
   entryDate: String!
@@ -15,8 +25,13 @@ type ImaService {
   deviceSerialNumber: String!
   deviceCondition: String!
   deviceNotes: String
+  diagnosis: String
+  invoiceId: String
+  invoiceNote: String
   clientId: Int!
+  employeeId: Int!
   client: Client!
+  employee: Employee
 }
 
 type Client {
@@ -28,17 +43,10 @@ type Client {
   services: [ImaService!]
 }
 
-type Employee {
-  id: Int!
-  authId: String!
-  name: String!
-  email: String!
-  role: String!
-}
-
 type Query {
   imaServices: [ImaService!]!
   imaService(id: Int!): ImaService!
+  clientService(serviceId: Int!, clientPhone: String!): ImaService!
   clients: [Client!]!
   clientByEmail(email: String!): Client!
   client(id: Int!): Client!
@@ -47,6 +55,7 @@ type Query {
 
 type Mutation {
   createImaService(createImaServiceInput: CreateImaServiceInput!): ImaService!
+  updateImaService(updateImaServiceInput: UpdateImaServiceInput!): ImaService!
   createClient(createClientInput: CreateClientInput!): Client!
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
 }
@@ -65,6 +74,26 @@ input CreateImaServiceInput {
   deviceNotes: String
   deviceSerialNumber: String!
   clientId: Int
+  employeeId: Int!
+}
+
+input UpdateImaServiceInput {
+  clientComment: String
+  employeeNotes: String
+  entryDate: String
+  departureDate: String
+  toPickup: Boolean
+  deviceCondition: String
+  deviceModel: String
+  deviceNotes: String
+  deviceSerialNumber: String
+  id: Int!
+  completedPercent: Int
+  cost: Float
+  diagnosis: String
+  invoiceId: String
+  invoiceNote: String
+  status: String
 }
 
 input CreateClientInput {
